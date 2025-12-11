@@ -26,45 +26,6 @@ services:
         sync: false
       - key: RSA_PUBLIC_KEY
         sync: false
-    startCommand: |
-      mkdir -p config
-
-      cat > config/config.json << EOF
-      {
-        "app": {
-          "nodeEnv": "${NODE_ENV}",
-          "port": 3000,
-          "logLevel": "info"
-        },
-        "database": {
-          "url": "${DATABASE_URL}"
-        },
-        "authentication": {
-          "passwordSaltLength": ${PASSWORD_SALT_LENGTH}
-        },
-        "secrets": {
-          "appSecret": "${APP_SECRET}",
-          "jwtAccessSecret": "${JWT_ACCESS_SECRET}",
-          "jwtRefreshSecret": "${JWT_REFRESH_SECRET}"
-        },
-        "rsa": {
-          "privateKeyPath": "config/rsa_private.pem",
-          "publicKeyPath": "config/rsa_public.pem"
-        }
-      }
-      EOF
-
-      cat > config/rsa_private.pem << EOF
-      ${RSA_PRIVATE_KEY}
-      EOF
-
-      cat > config/rsa_public.pem << EOF
-      ${RSA_PUBLIC_KEY}
-      EOF
-
-      bun run db:migrate || true
-
-      bun run src/index.ts
 
 databases:
   - name: social-db
