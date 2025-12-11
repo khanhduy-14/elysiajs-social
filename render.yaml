@@ -2,26 +2,15 @@
 # This file defines your infrastructure as code
 # Documentation: https://render.com/docs/blueprint-spec
 
-services:
+databases:
   # PostgreSQL Database
-  - type: pserv
-    name: elysiajs-social-db
-    env: docker
+  - name: elysiajs-social-db
+    databaseName: social-db
+    user: admin
     plan: free
     region: oregon
-    dockerfilePath: ./Dockerfile.postgres
-    envVars:
-      - key: POSTGRES_USER
-        value: admin
-      - key: POSTGRES_DB
-        value: social-db
-      - key: POSTGRES_PASSWORD
-        generateValue: true
-    disk:
-      name: postgres-data
-      mountPath: /var/lib/postgresql/data
-      sizeGB: 1
 
+services:
   # Application
   - type: web
     name: elysiajs-social-app
@@ -38,10 +27,6 @@ services:
         fromDatabase:
           name: elysiajs-social-db
           property: connectionString
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: elysiajs-social-db
-          property: password
       - key: RSA_PRIVATE_KEY
         sync: false
       - key: RSA_PUBLIC_KEY
