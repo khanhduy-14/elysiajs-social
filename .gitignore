@@ -32,11 +32,7 @@ yarn-error.log*
 .env.production.local
 
 # config secrets
-config
-config/config.json
-config/db_password.txt
-config/rsa_private.pem
-config/rsa_public.pem
+/config
 
 # vercel
 .vercel
