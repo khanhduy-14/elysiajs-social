@@ -7,15 +7,14 @@ import { DatabaseConnectionError } from "../utils/errors";
 import { config } from "../config";
 
 function getPassword(): string {
-  // If DATABASE_URL is available, we don't need password file
-  if (config.database.url) {
+  if (config.database.url && config.database.url.trim() !== "") {
     return "";
   }
 
-  const passwordFile = config.database.passwordFile;
-
-  if (fs.existsSync(passwordFile)) {
-    return fs.readFileSync(passwordFile, "utf-8").trim();
+  if (config.database.passwordFile) {
+    if (fs.existsSync(config.database.passwordFile)) {
+      return fs.readFileSync(config.database.passwordFile, "utf-8").trim();
+    }
   }
 
   const localPasswordFile = path.resolve(
@@ -27,14 +26,14 @@ function getPassword(): string {
   }
 
   throw new Error(
-    `Database password not found. Checked:\n  - ${passwordFile}\n  - ${localPasswordFile}`,
+    `Database password not found. Checked:\n  - ${config.database.passwordFile}\n  - ${localPasswordFile}`,
   );
 }
 
-const password = getPassword();
 const databaseUrl =
-  config.database.url ||
-  `postgresql://${config.database.user}:${password}@${config.database.host}:${config.database.port}/${config.database.name}`;
+  config.database.url && config.database.url.trim() !== ""
+    ? config.database.url
+    : `postgresql://${config.database.user}:${getPassword()}@${config.database.host}:${config.database.port}/${config.database.name}`;
 
 const pool = new Pool({ connectionString: databaseUrl });
 

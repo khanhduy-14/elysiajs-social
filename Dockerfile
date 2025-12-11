@@ -59,7 +59,7 @@ EOF\n\
 fi\n\
 \n\
 # Run migrations\n\
-bun run db:migrate || true\n\
+bun run db:migrate\n\
 \n\
 # Start the application\n\
 exec "$@"' > entrypoint.sh && chmod +x entrypoint.sh
