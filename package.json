@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --target=bun --outdir=dist",
     "start:dev":"docker compose -f docker-compose.yml up",
     "db:generate": "drizzle-kit generate --name",
     "db:migrate": "drizzle-kit migrate"
