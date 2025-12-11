@@ -161,6 +161,68 @@ npm run test        # Run tests (not yet implemented)
 | [Pino](https://getpino.io) | Structured logging |
 | [Docker](https://www.docker.com) | Containerization |
 
+## 🚀 Deployment
+
+Deploy this application to the cloud with automated GitHub Actions workflows!
+
+### Supported Platforms
+
+| Platform | Free Tier | Database | Setup Time | Recommended For |
+|----------|-----------|----------|------------|-----------------|
+| **Railway** ⭐ | $5 credit/month | ✅ PostgreSQL | 5 min | Best for this project |
+| **Render** | 750 hrs/month | ✅ PostgreSQL | 10 min | Production apps |
+| **Fly.io** | 3 VMs free | ✅ Add-on | 15 min | Global distribution |
+
+### Quick Deploy
+
+#### Railway (Recommended)
+
+1. **One-Click Deploy**:
+   
+   [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/elysiajs)
+
+2. **Or deploy via GitHub Actions**:
+   - Get your Railway token from [railway.app/account/tokens](https://railway.app/account/tokens)
+   - Add `RAILWAY_TOKEN` to GitHub Secrets
+   - Push to `main` branch - automatic deployment! ✨
+
+#### Render
+
+1. Click "New +" → "Blueprint" in [Render Dashboard](https://dashboard.render.com)
+2. Connect this repository
+3. Render will use `render.yaml` for setup
+4. Add environment variables and deploy
+
+#### Fly.io
+
+```bash
+# Install Fly CLI
+curl -L https://fly.io/install.sh | sh
+
+# Login and deploy
+fly auth login
+fly launch
+fly deploy
+```
+
+### 📖 Detailed Guides
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive deployment guides including:
+- Step-by-step platform setup
+- GitHub Actions configuration
+- Environment variables
+- Database setup
+- Troubleshooting
+
+### Required Secrets
+
+For GitHub Actions deployment, add these secrets to your repository:
+
+**Railway**: `RAILWAY_TOKEN`
+**Render**: `RENDER_API_KEY`, `RENDER_SERVICE_ID`
+**Fly.io**: `FLY_API_TOKEN`
+
+Plus environment-specific variables (RSA keys, etc.) - see [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ## Contributing
 
