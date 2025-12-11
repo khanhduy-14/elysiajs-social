@@ -27,6 +27,9 @@ services:
         fromDatabase:
           name: elysiajs-social-db
           property: connectionString
+      # RSA keys must be manually set in Render dashboard
+      # Generate with: openssl genrsa -out rsa-private.pem 2048
+      #                openssl rsa -in rsa-private.pem -pubout -out rsa-public.pem
       - key: RSA_PRIVATE_KEY
         sync: false
       - key: RSA_PUBLIC_KEY
