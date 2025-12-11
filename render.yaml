@@ -5,8 +5,8 @@ services:
     plan: starter
     dockerfilePath: ./Dockerfile
     dockerContext: .
-    healthCheckPath: /
-    autoDeploy: true
+    healthCheckPath: /health
+    autoDeploy: false
     envVars:
       - key: NODE_ENV
         value: production
@@ -61,6 +61,8 @@ services:
       cat > config/rsa_public.pem << EOF
       ${RSA_PUBLIC_KEY}
       EOF
+
+      bun run db:migrate || true
 
       bun run src/index.ts
 
