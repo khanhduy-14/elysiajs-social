@@ -165,6 +165,8 @@ npm run test        # Run tests (not yet implemented)
 
 Deploy this application to the cloud with automated GitHub Actions workflows!
 
+**[📖 Quick Start Guide](QUICKSTART.md)** - Deploy in 5 minutes!
+
 ### Supported Platforms
 
 | Platform | Free Tier | Database | Setup Time | Recommended For |
