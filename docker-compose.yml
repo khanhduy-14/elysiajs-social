@@ -1,0 +1,44 @@
+# === SERVICES ===
+services:
+  postgres:
+    image: postgres:16
+    container_name: my_postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_DB: social-db
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    secrets:
+      - db_password
+    networks:
+      - server
+
+  app:
+    build: .
+    container_name: social-app
+    command: bun run dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - server
+
+# === VOLUMES ===
+volumes:
+  postgres_data:
+
+# === SECRETS ===
+secrets:
+  db_password:
+    file: ./config/db_password.txt
+
+# === NETWORKS ===
+networks:
+  server:

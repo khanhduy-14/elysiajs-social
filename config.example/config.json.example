@@ -1,0 +1,26 @@
+{
+  "app": {
+    "nodeEnv": "development",
+    "port": 3000,
+    "logLevel": "debug"
+  },
+  "database": {
+    "host": "postgres",
+    "port": 5432,
+    "name": "social-db",
+    "user": "admin",
+    "passwordFile": "/run/secrets/db_password"
+  },
+  "authentication": {
+    "passwordSaltLength": 10
+  },
+  "secrets": {
+    "appSecret": "YOUR_APP_SECRET_HERE",
+    "jwtAccessSecret": "YOUR_JWT_ACCESS_SECRET_HERE",
+    "jwtRefreshSecret": "YOUR_JWT_REFRESH_SECRET_HERE"
+  },
+  "rsa": {
+    "privateKeyPath": "config/rsa_private.pem",
+    "publicKeyPath": "config/rsa_public.pem"
+  }
+}

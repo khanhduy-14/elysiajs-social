@@ -25,10 +25,18 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# config secrets
+config
+config/config.json
+config/db_password.txt
+config/rsa_private.pem
+config/rsa_public.pem
 
 # vercel
 .vercel
@@ -40,3 +48,7 @@ yarn-error.log*
 **/*.log
 package-lock.json
 **/*.bun
+
+# logs
+/logs
+*.log
