@@ -15,6 +15,9 @@ COPY . .
 RUN echo '#!/bin/bash\n\
 set -e\n\
 \n\
+# Debug: Print environment variables\n\
+echo "DATABASE_URL: ${DATABASE_URL}"\n\
+\n\
 # Create config directory\n\
 mkdir -p config\n\
 \n\
@@ -57,6 +60,10 @@ if [ -n "$RSA_PUBLIC_KEY" ]; then\n\
 ${RSA_PUBLIC_KEY}\n\
 EOF\n\
 fi\n\
+\n\
+# Debug: Print config.json\n\
+echo "Config content:"\n\
+cat config/config.json\n\
 \n\
 # Run migrations\n\
 bun run db:migrate\n\
